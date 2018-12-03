@@ -52,3 +52,8 @@ function negativeIndex(){
 ```
 
 ## Referece 
+
+
+1. ([유인동님 DOM 라이브러리](https://github.com/marpple/FxJS-DOM))
+
+1. ([함수형 js 인프런 강의 Repo](https://github.com/indongyoo/functional-javascript))
