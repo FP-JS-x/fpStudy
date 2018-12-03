@@ -20,14 +20,15 @@ fpStudy
 
 1. ~ 인프런 책 1장까지
 2. [문제 낸 것 해오기...ing](https://gist.github.com/amorfati0310/7563143758a6f3f15263ac619291e9d6)
-3. 책에 나온 함수 만들어오기 이번주 만들어 볼 함수들 : 
-  3.1 map 
-  3.2 filter
-  3.3 find 
-  3.4 findIndex
-  3.5 bValue 
-  3.6 bmatch (object, match, bmatch)
-  3.7 some, every만들기 
+3. 책에 나온 함수 만들어오기 이번주 만들어 볼 함수들 : <br>
+  3.1 map <br>
+  3.2 filter <br>
+  3.3 find <br>
+  3.4 findIndex <br>
+  3.5 bValue <br>
+  3.6 bmatch (object, match, bmatch) <br>
+  3.7 some, every만들기 <br>
+  
 ```javascript
 function identity(v){
   return v;
