@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //  load data를 해오면 1000개의 city Data를 배열로 받아옵니다.
+      //  city Data애 각각의 city정보는 이런 형식의 data 를 띄고 있습니다.
+      //
+      // {
+      //    city: "New York"
+      //    growth_from_2000_to_2013: "4.8%"
+      //    latitude: 40.7127837
+      //    longitude: -74.0059413
+      //    population: "8405837"
+      //    rank: "1"
+      //    state: "New York"
+      //  }
+
+      const cityUrl =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+      const load = async url => {
+        const response = await fetch(url);
+        const json = await response.json();
+        return json;
+      };
+
+      const cityData = load(cityUrl);
+
+      cityData.then(data => {
+        // 1. filter함수형을 통해서 city 가 B로 시작하는 함수를 만드시오
+        return filterList(data, (item) => item.city.match(/^[Bb].*/))
+      })
+      .then(bCity => {
+        console.log('bCity:', bCity);
+      })
+
+      // 2. fileter한 B로 시작하는 도시 데이터 중에서 pouplation 정보만 뽑아오는 filter-> map함수를 만들어 주세요
+      cityData.then(data => {
+        return filterList(data, (item) => item.city.match(/^[Bb].*/))
+      })
+      .then(bCity => {
+        return mapList(bCity, (item) => {
+          return {'city': item.city, 'population': item.population}
+        })
+      })
+      .then(populationData => {
+        console.log('populationData:', populationData);
+      })
+
+      // 3. bValues를 이용하여 'S'로 시작하는 도시 중에 성장률만 뽑아내주세요
+      cityData.then(data => {
+        return filterList(data, (item) => item.city.match(/^[Ss].*/))
+      })
+      .then(sCity => {
+        return mapList(sCity, item => {
+          return bValue('growth_from_2000_to_2013')(item)
+        })
+      })
+      .then(growthData => {
+        console.log('growthData:', growthData);
+      })
+
+      // 4. findIndex를 이용해서 matchData와 match되는 Idx를 구하시오
+      const matchData = {
+        growth_from_2000_to_2013: "20.2%",
+        latitude: 35.4675602
+      };
+
+      cityData.then(data => {
+        return data.findIndex(city => {
+          return city.growth_from_2000_to_2013 === matchData.growth_from_2000_to_2013 && city.latitude === matchData.latitude
+        })
+      })
+      .then(matchedDataIndex => {
+        console.log('matchedDataIndex:', matchedDataIndex);
+      })
+
+      // 5. 도시 데이터 중에서 중에서 B로 시작하는 도시 중에 growth_from_2000_to_2013 성장률이 양수인 도시들 중에 rank가 모두 20보다 큰지
+      // every함수를 통해서 만들어 보시오 !
+      cityData.then(data => {
+        return filterList(data, (item) => item.city.match(/^[Bb].*/))
+      })
+      .then(bCity => {
+        return filterList(bCity, (item) => Number(item.growth_from_2000_to_2013.slice(0, -1)) > 0)
+      })
+      .then(positiveGrowthCity => {
+        return positiveGrowthCity.every(city => {
+          return Number(city.rank) > 20
+        })
+      })
+      .then(result => {
+        console.log('result:', result);
+      })
+
+      // Utils
+      const filterList = (list, predicate) => {
+        return list.filter(item => {
+          return predicate(item);
+        })
+      }
+
+      const mapList = (list, iteratee) => {
+        return list.map((item) => {
+          return iteratee(item);
+        })
+      }
+
+      const bValue = key => obj => obj[key];
+
+      // const pipe = (...functions) => args => functions.reduce((arg, nextFn) => nextFn(arg), args);
+
+    </script>
+  </body>
+</html>
