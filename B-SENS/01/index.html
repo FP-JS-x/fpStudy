@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+   <script>
+            
+        //  load data를 해오면 1000개의 city Data를 배열로 받아옵니다.
+        //  city Data애 각각의 city정보는 이런 형식의 data 를 띄고 있습니다.
+        //
+        // {
+        //    city: "New York"
+        //    growth_from_2000_to_2013: "4.8%"
+        //    latitude: 40.7127837
+        //    longitude: -74.0059413
+        //    population: "8405837"
+        //    rank: "1"
+        //    state: "New York"
+        //  }
+
+
+        const cityUrl =
+        "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+
+        const load = async url => {
+        const response = await fetch(url);
+        const json = await response.json();
+        return json;
+        };
+
+        const cityData = load(cityUrl);
+
+        const city = [];
+
+        const filter = (list, predicate) => {
+            let new_list = [];
+            for(let i = 0, len = list.length; i < len; i++){
+                    if(predicate(list[i])) new_list.push(list[i]);
+            }
+            return new_list;
+        }
+
+        const map = (list, iteratee) => {
+            let new_list = [];
+            for(let i = 0, len = list.length; i < len; i++){
+                    new_list.push(iteratee(list[i]));
+            }
+            return new_list;
+        }
+
+        const bWord = (data, val) => filter(data, v => v.city[0] === val);
+        const bValues = (key, val) => obj => obj[key] === val;
+
+        // 2. filter한 B로 시작하는 도시 데이터 중에서 pouplation 정보만 뽑아오는 filter-> map함수를 만들어 주세요
+
+        cityData.then(data => bWord(data, 'B'))
+            .then(data => map(data, v => v.population))
+            .then(data => console.log(data));
+
+
+        // 3. bValues를 이용하여 'S'로 시작하는 도시 중에 성장률만 뽑아내주세요
+
+        cityData.then(data => bWord(data, 'S'))
+            .then(data => map(data, v => v.growth_from_2000_to_2013))
+            .then(data => console.log(data));
+
+        // 4. findIndex를 이용해서 matchData와 match되는 Idx를 구하시오
+
+        const findIndex = (list, predicate) => {
+        for(let i = 0, len = list.length; i < len; i++){
+            if(predicate(list[i])) return i;
+        }
+        return -1;
+        }
+
+        const match = obj => obj2 => {
+            for(let key in obj){
+                    if(obj[key] !== obj2[key]) return;
+            }
+            return true;
+        }
+
+        const matchData = {
+        growth_from_2000_to_2013: "20.2%",
+        latitude: 35.4675602
+        };
+
+        cityData.then(data => findIndex(data, match(matchData)))
+            .then(data => console.log(data));
+
+        // 5. 도시 데이터 중에서 중에서 B로 시작하는 도시 중에 growth_from_2000_to_2013 성장률이 양수인 도시들 중에 rank가 모두 20보다 큰지
+        // every함수를 통해서 만들어 보시오 !
+
+        const every = (list, predicate) => filter(list, predicate).length === list.length;
+        cityData.then(data => bWord(data, 'B'))
+            .then(data => filter(data, v => v.growth_from_2000_to_2013 > '0%'))
+            .then(data => every(data, v => v.rank > "20"))
+            .then(data => console.log(data));
+
+   </script>
+  </body>
+</html>
