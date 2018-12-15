@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>todo list</title>
+  </head>
+  <body>
+    <div class="todos">
+      <label> 완료 항목 숨기기 <input type="checkbox" /> </label>
+      <ul class="todo-list"></ul>
+    </div>
+    <script>
+      const todoData = [
+        {
+          id: 1,
+          name: 'A',
+          done: false,
+          start_date: new Date('2018-12-01'),
+          due_date: new Date('2018-12-15'),
+        },
+        {
+          id: 2,
+          name: 'B',
+          done: true,
+          start_date: new Date('2018-12-10'),
+          due_date: new Date('2018-12-31'),
+        },
+        {
+          id: 3,
+          name: 'C',
+          done: false,
+          start_date: new Date('2018-11-30'),
+          due_date: new Date('2018-12-20'),
+        },
+        {
+          id: 4,
+          name: 'D',
+          done: true,
+          start_date: new Date('2018-12-05'),
+          due_date: new Date('2018-12-26'),
+        },
+        {
+          id: 5,
+          name: 'E',
+          done: false,
+          start_date: new Date('2018-10-21'),
+          due_date: new Date('2018-11-15'),
+        },
+        {
+          id: 6,
+          name: 'F',
+          done: false,
+          start_date: new Date('2018-11-29'),
+          due_date: new Date('2018-12-10'),
+        },
+        {
+          id: 7,
+          name: 'G',
+          done: true,
+          start_date: new Date('2018-12-12'),
+          due_date: new Date('2018-12-14'),
+        },
+        {
+          id: 8,
+          name: 'H',
+          done: true,
+          start_date: new Date('2018-12-14'),
+          due_date: new Date('2018-12-28'),
+        },
+        {
+          id: 9,
+          name: 'I',
+          done: true,
+          start_date: new Date('2018-12-05'),
+          due_date: new Date('2018-12-23'),
+        },
+        {
+          id: 10,
+          name: 'J',
+          done: false,
+          start_date: new Date('2018-12-24'),
+          due_date: new Date('2018-12-30'),
+        },
+        {
+          id: 11,
+          name: 'K',
+          done: false,
+          start_date: new Date('2018-11-20'),
+          due_date: new Date('2018-12-11'),
+        },
+        {
+          id: 12,
+          name: 'L',
+          done: false,
+          start_date: new Date('2018-11-22'),
+          due_date: new Date('2018-12-01'),
+        },
+        {
+          id: 13,
+          name: 'M',
+          done: false,
+          start_date: new Date('2018-11-01'),
+          due_date: new Date('2018-12-31'),
+        },
+        {
+          id: 14,
+          name: 'N',
+          done: false,
+          start_date: new Date('2018-10-31'),
+          due_date: new Date('2018-11-31'),
+        },
+        {
+          id: 15,
+          name: 'O',
+          done: true,
+          start_date: new Date('2018-10-31'),
+          due_date: new Date('2018-11-31'),
+        },
+      ];
+
+      // 완료된 todo만 볼 수 있는 doneList를 만들어주세요.
+      const doneList;
+
+      // 완료된 todo의 name property만 todos Array로 만들어주세요.
+      const todos;
+
+      // 오늘(TODAY) 기준으로 기한이 지났지만 아직 완료되지 않은 delayed_todos를 만들어주세요.
+      const TODAY = new Date('2018-12-15');
+      const delayed_todos;
+      
+      // 완료된 todo 중에 오늘(TODAY)을 기준으로 아직 기한이 남은 todo의 id, name, due_date를 가져오는
+      // 하나의 함수를 만들어주세요 (compose)
+      const getIdNameDueDateFromTodosDone;
+
+    </script>
+  </body>
+</html>
