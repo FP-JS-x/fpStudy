@@ -98,7 +98,7 @@
         const every = (list, predicate) => filter(list, predicate).length === list.length;
         cityData.then(data => bWord(data, 'B'))
             .then(data => filter(data, v => v.growth_from_2000_to_2013 > '0%'))
-            .then(data => every(data, v => v.rank > "20"))
+            .then(data => every(data, v => Number(v.rank) > 20))
             .then(data => console.log(data));
 
    </script>
